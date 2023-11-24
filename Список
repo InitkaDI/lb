@@ -1,0 +1,96 @@
+// Класс, представляющий узел списка
+class Node {
+    int data; // Значение узла
+    Node next; // Ссылка на следующий узел
+
+    // Конструктор для создания узла
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+// Класс, представляющий сам список
+class LinkedList {
+    private Node head; // Головной узел списка
+
+    // Конструктор для создания пустого списка
+    public LinkedList() {
+        this.head = null;
+    }
+
+    // Метод для вставки нового узла в конец списка
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            // Если список пуст, новый узел становится головным
+            head = newNode;
+        } else {
+            // Иначе, идем до конца списка и добавляем новый узел
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    // Метод для удаления узла с заданным значением из списка
+    public void delete(int data) {
+        if (head == null) {
+            // Если список пуст, ничего не делаем
+            return;
+        }
+
+        if (head.data == data) {
+            // Если удаляемый узел - головной, переустанавливаем голову на следующий узел
+            head = head.next;
+            return;
+        }
+
+        // Иначе, ищем узел для удаления
+        Node current = head;
+        Node previous = null;
+
+        while (current != null && current.data != data) {
+            previous = current;
+            current = current.next;
+        }
+
+        if (current == null) {
+            // Если узел с заданным значением не найден, ничего не делаем
+            return;
+        }
+
+        // Удаляем узел, переключив ссылку предыдущего узла на следующий узел
+        previous.next = current.next;
+    }
+
+    // Метод для вывода содержимого списка
+    public void display() {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Пример использования списка
+        LinkedList myList = new LinkedList();
+        myList.insert(1);
+        myList.insert(2);
+        myList.insert(3);
+
+        System.out.println("Список после вставки: ");
+        myList.display(); // Вывод: 1 2 3
+
+        myList.delete(2);
+
+        System.out.println("Список после удаления: ");
+        myList.display(); // Вывод: 1 3
+    }
+}
