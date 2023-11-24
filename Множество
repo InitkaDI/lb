@@ -1,0 +1,65 @@
+import java.util.HashSet;
+
+public class MySet<T> {
+    private HashSet<T> set;
+
+    // Конструктор, инициализирующий пустое множество
+    public MySet() {
+        set = new HashSet<>();
+    }
+
+    // Метод для добавления элемента в множество
+    public void add(T element) {
+        set.add(element);
+    }
+
+    // Метод для удаления элемента из множества
+    public void remove(T element) {
+        set.remove(element);
+    }
+
+    // Метод для проверки наличия элемента в множестве
+    public boolean contains(T element) {
+        return set.contains(element);
+    }
+
+    // Метод для получения размера множества
+    public int size() {
+        return set.size();
+    }
+
+    // Метод для проверки, является ли множество пустым
+    public boolean isEmpty() {
+        return set.isEmpty();
+    }
+
+    // Метод для очистки множества
+    public void clear() {
+        set.clear();
+    }
+
+    // Метод для получения всех элементов множества в виде массива
+    public Object[] toArray() {
+        return set.toArray();
+    }
+
+    // Другие методы по необходимости...
+
+    public static void main(String[] args) {
+        // Пример использования
+        MySet<String> mySet = new MySet<>();
+        mySet.add("apple");
+        mySet.add("orange");
+        mySet.add("banana");
+
+        System.out.println("Set size: " + mySet.size());
+        System.out.println("Contains 'apple': " + mySet.contains("apple"));
+        System.out.println("Contains 'grape': " + mySet.contains("grape"));
+
+        mySet.remove("orange");
+        System.out.println("After removing 'orange', set size: " + mySet.size());
+
+        mySet.clear();
+        System.out.println("After clearing the set, set size: " + mySet.size());
+    }
+}
