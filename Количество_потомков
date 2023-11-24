@@ -1,0 +1,66 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class TreeNode<T> {
+    private T data;
+    private List<TreeNode<T>> children;
+
+    // Конструктор для создания узла с указанными данными
+    public TreeNode(T data) {
+        this.data = data;
+        this.children = new ArrayList<>();
+    }
+
+    // Метод для добавления потомка к текущему узлу
+    public void addChild(TreeNode<T> child) {
+        this.children.add(child);
+    }
+
+    // Метод для получения данных текущего узла
+    public T getData() {
+        return this.data;
+    }
+
+    // Метод для получения потомков текущего узла
+    public List<TreeNode<T>> getChildren() {
+        return this.children;
+    }
+}
+
+public class TreeExample {
+    public static void main(String[] args) {
+        // Создаем узлы дерева
+        TreeNode<String> root = new TreeNode<>("Root");
+        TreeNode<String> child1 = new TreeNode<>("Child 1");
+        TreeNode<String> child2 = new TreeNode<>("Child 2");
+        TreeNode<String> child3 = new TreeNode<>("Child 3");
+
+        // Добавляем потомков к корневому узлу
+        root.addChild(child1);
+        root.addChild(child2);
+        root.addChild(child3);
+
+        // Добавляем потомков к узлу Child 1
+        child1.addChild(new TreeNode<>("Child 1.1"));
+        child1.addChild(new TreeNode<>("Child 1.2"));
+
+        // Добавляем потомков к узлу Child 2
+        child2.addChild(new TreeNode<>("Child 2.1"));
+
+        // Выводим структуру дерева
+        printTree(root, 0);
+    }
+
+    // Рекурсивный метод для вывода структуры дерева
+    private static void printTree(TreeNode<?> node, int depth) {
+        for (int i = 0; i < depth; i++) {
+            System.out.print("\t"); // Отступ для визуализации уровня вложенности
+        }
+        System.out.println(node.getData());
+
+        // Рекурсивно вызываем метод для каждого потомка текущего узла
+        for (TreeNode<?> child : node.getChildren()) {
+            printTree(child, depth + 1);
+        }
+    }
+}
