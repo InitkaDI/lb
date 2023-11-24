@@ -1,0 +1,78 @@
+//Разработать собственные классы, реализующие структуру данных Стек, средствами чистой Java
+public class Stack<T> {
+    private Node<T> top; // вершина стека
+
+    // Класс, представляющий узел стека
+    private static class Node<T> {
+        private T data; // данные узла
+        private Node<T> next; // ссылка на следующий узел
+
+        public Node(T data) {
+            this.data = data;
+        }
+    }
+
+    // Поместить элемент на вершину стека
+    public void push(T item) {
+        Node<T> newNode = new Node<>(item);
+        newNode.next = top;
+        top = newNode;
+    }
+
+    // Извлечь элемент с вершины стека
+    public T pop() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Стек пуст");
+        }
+        T data = top.data;
+        top = top.next;
+        return data;
+    }
+
+    // Получить элемент с вершины стека (без извлечения)
+    public T peek() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Стек пуст");
+        }
+        return top.data;
+    }
+
+    // Проверить, пуст ли стек
+    public boolean isEmpty() {
+        return top == null;
+    }
+
+    // Получить размер стека
+    public int size() {
+        int count = 0;
+        Node<T> current = top;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
+    }
+
+    // Очистить стек
+    public void clear() {
+        top = null;
+    }
+
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+
+        // Добавляем элементы в стек
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+
+        // Выводим размер стека
+        System.out.println("Размер стека: " + stack.size());
+
+        // Извлекаем элементы из стека и выводим их
+        System.out.println("Извлеченные элементы:");
+        while (!stack.isEmpty()) {
+            System.out.println(stack.pop());
+        }
+    }
+}
