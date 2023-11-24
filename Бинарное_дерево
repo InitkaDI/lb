@@ -1,0 +1,88 @@
+//Бинарное_дерево
+class TreeNode {
+    int data;
+    TreeNode left;
+    TreeNode right;
+
+    public TreeNode(int data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class BinaryTree {
+    private TreeNode root;
+
+    public BinaryTree() {
+        this.root = null;
+    }
+
+    // Метод для вставки элемента в бинарное дерево
+    public void insert(int data) {
+        root = insertRec(root, data);
+    }
+
+    private TreeNode insertRec(TreeNode root, int data) {
+        // Если дерево пустое, создаем новый узел
+        if (root == null) {
+            root = new TreeNode(data);
+            return root;
+        }
+
+        // Рекурсивно вставляем элемент в левое поддерево, если он меньше корня
+        if (data < root.data) {
+            root.left = insertRec(root.left, data);
+        }
+        // Рекурсивно вставляем элемент в правое поддерево, если он больше корня
+        else if (data > root.data) {
+            root.right = insertRec(root.right, data);
+        }
+
+        // Возвращаем корень дерева после вставки
+        return root;
+    }
+
+    // Метод для поиска элемента в бинарном дереве
+    public boolean search(int data) {
+        return searchRec(root, data);
+    }
+
+    private boolean searchRec(TreeNode root, int data) {
+        // Если дерево пустое или мы достигли конца поддерева
+        if (root == null) {
+            return false;
+        }
+
+        // Если элемент найден
+        if (root.data == data) {
+            return true;
+        }
+
+        // Рекурсивно ищем в левом или правом поддереве, в зависимости от значения элемента
+        if (data < root.data) {
+            return searchRec(root.left, data);
+        } else {
+            return searchRec(root.right, data);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+
+        // Вставка элементов
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(20);
+        tree.insert(40);
+        tree.insert(70);
+        tree.insert(60);
+        tree.insert(80);
+
+        // Поиск элемента
+        System.out.println(tree.search(40)); // Вывод: true
+        System.out.println(tree.search(90)); // Вывод: false
+    }
+}
